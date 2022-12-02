@@ -1,23 +1,21 @@
 ﻿using System.Text;
 
-long num = (long)1e2;
+long num = (long)1e7;
 var aggregate = Enumerable.Range(0, (int)Math.Floor(2.52 * Math.Sqrt(num) / Math.Log(num))).Aggregate(
     Enumerable.Range(2, (int)num - 1).ToList(),
     (result, index) =>
     {
-        Console.WriteLine(index);
         var bp = result[index];
         var sqr = bp * bp;
         result.RemoveAll(i => i >= sqr && i % bp == 0);
         return result;
     }
 );
-
-
 StringBuilder sb = new StringBuilder();
 sb.Append("using System;");
 sb.Append("using System.IO;");
-sb.Append("using System.Text; namespace Task3{public class PrimeNumbers{public static byte[] PrimeGaps = new byte[]{");
+sb.Append("using System.Text;");
+sb.Append(File.ReadAllText("NewFile1.txt"));
 for (var index = 1; index < aggregate.Count; index++)
 {
     var i = aggregate[index];
@@ -38,8 +36,6 @@ for (var index = 1; index < aggregate.Count; index++)
     }
 }
 
-sb.Append("};}");
-sb.Append(File.ReadAllText("NewFile1.txt"));
-sb.Append("}");
+sb.Append("});}}");
 
-File.WriteAllText("Solution.cs", sb.ToString());
+File.WriteAllText("solution1e7", sb.ToString());

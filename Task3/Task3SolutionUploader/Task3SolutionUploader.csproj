@@ -9,9 +9,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Include="Solution.xxx">
+      <None Update="Solution1e7">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="solution1e2">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="solution1e6">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
+
 
 </Project>

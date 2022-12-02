@@ -50,7 +50,7 @@ public class Tests3
         var stringBuilder = new StringBuilder();
         var textWriter = new StringWriter(stringBuilder);
 
-        new Task3.Task3().Process(textReader, textWriter);
+        new Task3.Task3X().Process(textReader, textWriter);
 
         var result = stringBuilder.ToString().TrimEnd('\n').TrimEnd('\r');
         Assert.That(result, Is.EqualTo(string.Join(Environment.NewLine, results)));
@@ -65,7 +65,7 @@ public class Tests3
         var textWriter = new StringWriter(stringBuilder);
 
         var startNew = Stopwatch.StartNew();
-        new Task3.Task3().Process(textReader, textWriter);
+        new Task3.Task3X().Process(textReader, textWriter);
         startNew.Stop();
         Console.WriteLine(startNew.ElapsedMilliseconds);
         var result = stringBuilder.ToString().TrimEnd('\n').TrimEnd('\r');
@@ -78,7 +78,7 @@ public class Tests3
     {
         for (int i = 999; i < 1002; i++)
         {
-            var result = Result(i, new Task3.Task3());
+            var result = Result(i, new Task3.Task3X());
             var result2 = Result(i, new Task3.Task3Slow());
             Console.WriteLine(i+":"+result);
             Assert.That(result, Is.EqualTo(result2), "For " + i);

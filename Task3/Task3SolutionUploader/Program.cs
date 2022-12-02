@@ -3,13 +3,13 @@ using System.Text;
 using System.Text.Json;
 
 var result = new Result();
-result.values = new[] { File.ReadAllText("Solution.xxx") };
+result.values = new[] { File.ReadAllText("solution1e7") };
 var serialize = JsonSerializer.Serialize(result);
 using var handler = new HttpClientHandler();
 
 var cookies = new CookieContainer();
 cookies.Add(new Cookie("token",
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mzk2NzExLCJtYXN0ZXJfaWQiOm51bGwsInJvbGVzIjpbXSwiZXhwIjoxNjcwMDExMDMyLCJpbnRyYW5ldCI6ZmFsc2UsImF1dGhfdHlwZSI6ImV4dCIsInRhZ3MiOlsidGlua29mZl9lZHVjYXRpb24iXX0.Dd0MPCoq6tDZxIJGO_oydlNYJ25N1495k8Zw0K1LTes",
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mzk2OTE3LCJtYXN0ZXJfaWQiOm51bGwsInJvbGVzIjpbXSwiZXhwIjoxNjcwMDE1ODQ0LCJpbnRyYW5ldCI6ZmFsc2UsImF1dGhfdHlwZSI6ImV4dCIsInRhZ3MiOlsidGlua29mZl9lZHVjYXRpb24iXX0.YwkDfpHHs-dNhgg-hC0ORI9p-dihiXLtx9DCnnJlzZg",
     "/", "edu.tinkoff.ru"));
 handler.CookieContainer = cookies;
 var httpClient = new HttpClient(handler);
