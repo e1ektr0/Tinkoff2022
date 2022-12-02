@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-long num = (long)1e8;
+long num = (long)1e2;
 var aggregate = Enumerable.Range(0, (int)Math.Floor(2.52 * Math.Sqrt(num) / Math.Log(num))).Aggregate(
     Enumerable.Range(2, (int)num - 1).ToList(),
     (result, index) =>
