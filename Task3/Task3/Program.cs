@@ -1,0 +1,1 @@
+﻿new Task3.Task3().Process(Console.In, Console.Out);

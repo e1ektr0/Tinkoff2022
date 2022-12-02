@@ -23,9 +23,9 @@ public class Task1 : IConsoleTest
             }
             else
             {
-                if(skipBeforeSpace)
+                if (skipBeforeSpace)
                     continue;
-                
+
                 if (b[i] == lastSymbol)
                 {
                     skipBeforeSpace = true;
@@ -35,7 +35,7 @@ public class Task1 : IConsoleTest
                 lastSymbol = b[i];
             }
         }
-        
+
         textWriter.WriteLine(result);
     }
 }
