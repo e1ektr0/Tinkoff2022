@@ -9,7 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="Solution.cs" />
       <None Include="Solution.xxx">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
