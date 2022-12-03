@@ -9,7 +9,7 @@ using var handler = new HttpClientHandler();
 
 var cookies = new CookieContainer();
 cookies.Add(new Cookie("token",
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mzk3ODAwLCJtYXN0ZXJfaWQiOm51bGwsInJvbGVzIjpbXSwiZXhwIjoxNjcwMDczMzYwLCJpbnRyYW5ldCI6ZmFsc2UsImF1dGhfdHlwZSI6ImV4dCIsInRhZ3MiOlsidGlua29mZl9lZHVjYXRpb24iXX0.GHfac4uhFw80GuHKcL9irqgXxMfZeEM4fIs2MWQ3cOo",
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mzk3ODAwLCJtYXN0ZXJfaWQiOm51bGwsInJvbGVzIjpbXSwiZXhwIjoxNjcwMDc1NzM1LCJpbnRyYW5ldCI6ZmFsc2UsImF1dGhfdHlwZSI6ImV4dCIsInRhZ3MiOlsidGlua29mZl9lZHVjYXRpb24iXX0.izQKRwAOn18jgHBpmbSijGaBHQ1ZcuiHLyxxky8IE98",
     "/", "edu.tinkoff.ru"));
 handler.CookieContainer = cookies;
 var httpClient = new HttpClient(handler);

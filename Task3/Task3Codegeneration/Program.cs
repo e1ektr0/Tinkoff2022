@@ -1,10 +1,11 @@
 ﻿using System.Text;
 
-long num = (long)1e8;
+long num = (long)1e3;
 var aggregate = Enumerable.Range(0, (int)Math.Floor(2.52 * Math.Sqrt(num) / Math.Log(num))).Aggregate(
     Enumerable.Range(2, (int)num - 1).ToList(),
     (result, index) =>
     {
+        Console.WriteLine(index);
         var bp = result[index];
         var sqr = bp * bp;
         result.RemoveAll(i => i >= sqr && i % bp == 0);
@@ -90,4 +91,4 @@ for (var index = 1; index < aggregate.Count; index++)
 
 sb.Append(File.ReadAllText("dotnetpostfix.txt"));
 
-File.WriteAllText("Solution.cs", sb.ToString());
+File.WriteAllText("solution1e9", sb.ToString());
