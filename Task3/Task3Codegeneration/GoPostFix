@@ -1,0 +1,3 @@
+﻿}
+	fmt.Println(len(arr))
+}

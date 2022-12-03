@@ -2,7 +2,7 @@
 
 public class Task3X //: IConsoleTest
 {
-    public void Process(TextReader textReader, TextWriter textWriter, byte[] gaps)
+    public void Process(TextReader textReader, TextWriter textWriter,string gaps)
     {
         var n = int.Parse(textReader.ReadLine()!);
 

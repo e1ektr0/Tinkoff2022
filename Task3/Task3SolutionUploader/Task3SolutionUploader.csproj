@@ -12,10 +12,7 @@
       <None Update="Solution1e7">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="solution1e2">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="solution1e6">
+      <None Update="solution1e8">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
