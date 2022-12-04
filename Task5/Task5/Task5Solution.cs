@@ -10,12 +10,6 @@ public class Task5Solution : IConsoleTest
         public byte EvenOdd;
     }
 
-    //Построить графф - каждый аэропорт 2 узла(чётный и не чётный)
-    //Найти длиннейший путь. На основе этого выбрать чётность аэропортов(что бы остался только длинный путь)?  Гарантированно длиннейший?
-    //Хранить 2 дистанции? ВОзможно множественные пути? 
-    //Выключить аэропорты, и снова найти кратчайши путь для ксюши - путя нет. -1. В против случаее распечатать его.
-
-
     //Найти крайтчайшие пути, и в обратном порядке уничтожать их. Но можно ли полагаться на это?
     //Возможно уничтожение кратчайшего в ближайшее время преведёт к ошибке в дальнейшем. Придумать сценарий! Такого сценария нет!
     //Надо уничтожать кратчайший!
@@ -26,7 +20,7 @@ public class Task5Solution : IConsoleTest
         var m = int.Parse(strings[1]); //колличество рейсов
 
         var listVertex = new List<AirportVertex>?[n]; //airport->next->odd\even
-        var listVertexPrev = new List<int>?[n]; //airport->prev
+        var listVertexPrev = new List<AirportVertex>?[n]; //airport->prev
 
         PrepareGraph(textReader, m, listVertex);
 
@@ -46,31 +40,75 @@ public class Task5Solution : IConsoleTest
                 {
                     var nextDistance = distance[edge.AirportNumber];
                     var possibleDistance = distance[currentIndex] + 1;
+
+                    listVertexPrev[edge.AirportNumber] ??= new List<AirportVertex>(2);
+                    listVertexPrev[edge.AirportNumber]!.Add(new AirportVertex
+                    {
+                        EvenOdd = edge.EvenOdd,
+                        AirportNumber = currentIndex
+                    });
+
                     if (nextDistance != 0 && possibleDistance >= nextDistance)
                         continue;
 
                     distance[edge.AirportNumber] = possibleDistance;
-                    listVertexPrev[edge.AirportNumber] ??= new List<int>(2);
-                    listVertexPrev[edge.AirportNumber]!.Add(currentIndex);
                     queue.Enqueue(edge.AirportNumber);
                 }
         }
 
 
         var backPathIndex = n - 1;
-        bool[] result = new bool[n];
-        int minPath = distance[backPathIndex];
+        byte[] results = new byte[n];
+    
+
+        int resultMinPath = distance[backPathIndex];
         while (backPathIndex > 0)
         {
-            foreach (var list in listVertexPrev)
+            var currentMinPath = distance[backPathIndex];
+            var newMinPath = int.MaxValue;
+            foreach (var prevNode in listVertexPrev[backPathIndex])
             {
+                if (prevNode.EvenOdd < 3 && results[prevNode.AirportNumber] == 0)
+                {
+                    results[prevNode.AirportNumber] = prevNode.EvenOdd;
+                }
+                else
+                {
+                    results[prevNode.AirportNumber] = 1;
+                    if (newMinPath > distance[prevNode.AirportNumber])
+                    {
+                        newMinPath = distance[prevNode.AirportNumber];
+                        backPathIndex = prevNode.AirportNumber;
+                    }
+                }
+
+
                 //найти наикратчайший путь.
                 //уничтожить его(пометить ноду что она определённого типа - будет использоваться в ответе)
                 //увеличить общий путь до разницы с новым наименьшим - будет использоваться в ответе
                 //установить backPathIndex = новый путь
                 //если такого пути нет - то гг. -1, остальные значения не важны
             }
+
+            resultMinPath += newMinPath - currentMinPath + 1;
+            if (int.MaxValue == newMinPath) //нет обратного пути
+            {
+                resultMinPath = -1;
+                results[backPathIndex] = 0;
+                break;
+            }
         }
+
+        textWriter.WriteLine(resultMinPath);
+        for (var index = 0; index < results.Length; index++)
+        {
+            var result = results[index];
+            if (result == 2)
+                results[index] = 0;
+        }
+
+        results[n-1] = 1;
+        textWriter.WriteLine(string.Join("", results));
     }
 
     private static void PrepareGraph(TextReader textReader, int m, List<AirportVertex>?[] airportVertices)
