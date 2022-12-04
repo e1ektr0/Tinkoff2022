@@ -42,6 +42,7 @@ public class Task5Solution : IConsoleTest
                     var possibleDistance = distance[currentIndex] + 1;
 
                     listVertexPrev[edge.AirportNumber] ??= new List<AirportVertex>(2);
+                    //todo: possible can be improved. additional copy
                     listVertexPrev[edge.AirportNumber]!.Add(new AirportVertex
                     {
                         EvenOdd = edge.EvenOdd,
@@ -61,7 +62,7 @@ public class Task5Solution : IConsoleTest
         byte[] results = new byte[n];
     
 
-        int resultMinPath = distance[backPathIndex];
+        var resultMinPath = distance[backPathIndex];
         while (backPathIndex > 0)
         {
             var currentMinPath = distance[backPathIndex];
@@ -100,6 +101,7 @@ public class Task5Solution : IConsoleTest
         }
 
         textWriter.WriteLine(resultMinPath);
+        
         for (var index = 0; index < results.Length; index++)
         {
             var result = results[index];

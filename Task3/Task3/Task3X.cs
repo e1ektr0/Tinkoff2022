@@ -1,7 +1,9 @@
 ﻿namespace Task3;
 
+//todo: rename
 public class Task3X //: IConsoleTest
 {
+    //todo: return tests
     public void Process(TextReader textReader, TextWriter textWriter,string gaps)
     {
         var n = int.Parse(textReader.ReadLine()!);
@@ -34,7 +36,6 @@ public class Task3X //: IConsoleTest
         var temp = n;
         var possibleSolution2 = 1;
 
-        //rewrite, to binary search point of start
         var binarySearch = Array.BinarySearch(primeNumbers, 0, primeNumberIndex, n);
         if (binarySearch > 0) //prime number
         {
@@ -43,6 +44,7 @@ public class Task3X //: IConsoleTest
         }
 
         var startPoint = Math.Min(primeNumberIndex - 1, Math.Abs(binarySearch));
+        //todo: possible can be divide to /2
         for (int i = startPoint; i > 0; i--)
         {
             var primeNumber = primeNumbers[i];
