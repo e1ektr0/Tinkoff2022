@@ -10,11 +10,11 @@ public class Task4Solution : IConsoleTest
     private double[] _x = null!;
     private double[] _y = null!;
     private int n;
-    static Bitmap bmp = new(600, 400);
+    static Bitmap bmp = new(20000, 20000);
     Graphics gfx = Graphics.FromImage(bmp);
     Pen pen = new(Color.White);
 
-    int offsetX = 250;
+    int offsetX = bmp.Width/2;
     int offsetY = 10;
     double coof = 100;
 
@@ -79,7 +79,7 @@ public class Task4Solution : IConsoleTest
     {
         _x = new double[n];
         _y = new double[n];
-        var alfa = 180 * (n - 2) / n;
+        var alfa = 180d * (n - 2d) / n;
         double delta = 0;
         for (int i = 1; i < n; i++)
         {
@@ -91,6 +91,8 @@ public class Task4Solution : IConsoleTest
             _x[i] = _x[i - 1] + cosA;
             _y[i] = _y[i - 1] + sinA;
         }
+        
+        
     }
 
     private void PrintPoints(int n)
