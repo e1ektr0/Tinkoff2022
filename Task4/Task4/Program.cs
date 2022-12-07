@@ -4,21 +4,88 @@ using System.Drawing;
 
 new Task4Solution().Process(Console.In, Console.Out);
 
-[SuppressMessage("Interoperability", "CA1416:Проверка совместимости платформы")]
-public class Task4Solution : IConsoleTest
+public interface IDrawing
 {
-    private double[] _x = null!;
-    private double[] _y = null!;
-    private int n;
-    static Bitmap bmp = new(20000, 20000);
+    void PrintPoints(int i, Task4Solution task4Solution);
+    void Save();
+    void DrawLine(int i0, int i1);
+}
+
+public class DrawingStub : IDrawing
+{
+    public void PrintPoints(int i, Task4Solution task4Solution)
+    {
+        
+    }
+
+    public void Save()
+    {
+    }
+
+    public void DrawLine(int i0, int i1)
+    {
+    }
+}
+[SuppressMessage("Interoperability", "CA1416:Проверка совместимости платформы")]
+public class Drawing : IDrawing
+{
+    static Bitmap bmp = new(2000, 2000);
     Graphics gfx = Graphics.FromImage(bmp);
     Pen pen = new(Color.White);
 
     int offsetX = bmp.Width/2;
     int offsetY = 10;
     double coof = 100;
+    private Task4Solution task;
+    private bool _print = false;
+
+    public void PrintPoints(int i, Task4Solution task4Solution)
+    {
+        n = i;
+        gfx.Clear(Color.Blue);
+        PrintPointsI(i);
+        task = task4Solution;
+    }
+
+    private int n { get; set; }
+
+    public void Save()
+    {
+        bmp.Save("demo.png");
+    }
+    
+    private void PrintPointsI(int n)
+    {
+        for (int i = 1; i < n; i++)
+            DrawLine(i - 1, i);
+        DrawLine(0, n - 1);
+    }
+
+    public void DrawLine(int i0, int i1)
+    {
+        if (i0 == n)
+            i0 = 0;
+        if (i1 == n)
+            i1 = 0;
+        var x0 = task._x[i0];
+        var y0 = task._y[i0];
+        var x1 = task._x[i1];
+        var y1 = task._y[i1];
+
+        Point pt1 = new((int)(x0 * coof + offsetX), (int)(y0 * coof + offsetY));
+        Point pt2 = new((int)(x1 * coof + offsetX), (int)(y1 * coof + offsetY));
+        gfx.DrawLine(pen, pt1, pt2);
+    }
+}
 
 
+public class Task4Solution : IConsoleTest
+{
+    public double[] _x = null!;
+    public  double[] _y = null!;
+    private int n;
+
+    private IDrawing _drawing = new DrawingStub();
     public void Process(TextReader textReader, TextWriter textWriter)
     {
         n = int.Parse(textReader.ReadLine()!);
@@ -29,20 +96,23 @@ public class Task4Solution : IConsoleTest
         var p1 = n / 3;
         var p2 = n * 2 / 3;
 
-
-        gfx.Clear(Color.Blue);
+        
         var s = S(p0, p1, p2);
-        s += Range(p0, p1);
-        s += Range(p1, p2);
-        s += Range(p2, p0);
 
-        PrintPoints(n);
+        _drawing.PrintPoints(n, this);
+        
+        if (n != 3)
+        {
+            s += Range(p0, p1);
+            s += Range(p1, p2);
+            s += Range(p2, p0);
+        }
+        
+        _drawing.DrawLine(p0, p1);
+        _drawing. DrawLine(p1, p2);
+        _drawing.DrawLine(p2, p0);
 
-        DrawLine(p0, p1);
-        DrawLine(p1, p2);
-        DrawLine(p2, p0);
-
-        bmp.Save("demo.png");
+        _drawing.Save();
 
         textWriter.WriteLine(s);
     }
@@ -65,9 +135,9 @@ public class Task4Solution : IConsoleTest
 
         var c = (a + b) / 2;
 
-        DrawLine(a, b);
-        DrawLine(b, c);
-        DrawLine(c, a);
+        _drawing.DrawLine(a, b);
+        _drawing. DrawLine(b, c);
+        _drawing.DrawLine(c, a);
 
         var s = S(a, b, c);
         s += Range(a, c);
@@ -95,28 +165,7 @@ public class Task4Solution : IConsoleTest
         
     }
 
-    private void PrintPoints(int n)
-    {
-        for (int i = 1; i < n; i++)
-            DrawLine(i - 1, i);
-        DrawLine(0, n - 1);
-    }
-
-    private void DrawLine(int i0, int i1)
-    {
-        if (i0 == n)
-            i0 = 0;
-        if (i1 == n)
-            i1 = 0;
-        var x0 = _x[i0];
-        var y0 = _y[i0];
-        var x1 = _x[i1];
-        var y1 = _y[i1];
-
-        Point pt1 = new((int)(x0 * coof + offsetX), (int)(y0 * coof + offsetY));
-        Point pt2 = new((int)(x1 * coof + offsetX), (int)(y1 * coof + offsetY));
-        gfx.DrawLine(pen, pt1, pt2);
-    }
+ 
 
     private double S(int p1, int p2, int p3)
     {
