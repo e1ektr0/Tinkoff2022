@@ -94,15 +94,6 @@ public class Tree
                 val |= (long)1 << (31 - i);
         return val;
     }
-
-    static long ByteArrayToInt(byte[] arr)
-    {
-        long val = 0;
-        for (int i = 0; i < arr.Length; ++i)
-            if (arr[i] == 2)
-                val |= (long)1 << (31 - i);
-        return val;
-    }
 }
 
 public class Task6Solution : IConsoleTest
