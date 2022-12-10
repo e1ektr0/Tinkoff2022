@@ -16,13 +16,12 @@ public class Task2Solution : IConsoleTest
         long y = int.Parse(strings[1]);
         long z = int.Parse(strings[2]);
 
-        var sum = x/a + y/b + z/c;
-        var result = 0;
-        
-        for (long xi = 0; xi <= sum; xi++)
-            for (long yi = 0; yi <= sum - xi; yi++)
-                result++;
-        
+        var max = x / a + y / b + z / c;
+
+        long result = 0;
+        for (long i = 0; i <= max; i++)
+            result += max - i +1;
+
         textWriter.WriteLine(result);
     }
 
