@@ -12,7 +12,7 @@ public class Tree
 {
     public Node Root { get; set; } = new Node();
 
-    public void Add(int k)
+    public void Add(long k)
     {
         bool[] bitsArray = new bool[32];
         for (int i = 0; i < (int)Math.Log(k, 2) + 1; i++)
@@ -88,10 +88,10 @@ public class Task6Solution : IConsoleTest
     public void Process(TextReader textReader, TextWriter textWriter)
     {
         var tree = new Tree();
-        var q = int.Parse(textReader.ReadLine()!);
+        var q = long.Parse(textReader.ReadLine()!);
         for (int i = 0; i < q; i++)
         {
-            int k = int.Parse(textReader.ReadLine()!);
+            long k = long.Parse(textReader.ReadLine()!);
 
             tree.Add(k);
             textWriter.WriteLine(tree.Max());

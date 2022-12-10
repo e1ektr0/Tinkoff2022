@@ -1,4 +1,4 @@
-using System.Text;
+using System.Globalization;
 using Common;
 using Task6;
 
@@ -12,5 +12,17 @@ public class Task6Tests
     {
         var testRunner = new TestRunner<Task6Solution>();
         testRunner.Process(inputStrings, results);
+    }
+    
+    
+    
+    [Test]
+    public void BigNumber()
+    {
+        var pow = Math.Pow(2, 32)-1;
+        var testRunner = new TestRunner<Task6Solution>();
+        var input = new object[] { "2",pow.ToString(CultureInfo.InvariantCulture), "0" };
+        var result = new object[] { "0", "4294967295" };
+        testRunner.Process(input, result);
     }
 }
