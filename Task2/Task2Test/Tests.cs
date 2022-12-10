@@ -19,6 +19,6 @@ public class Tests
         
         var testRunner = new TestRunner<Task2Solution>();
         var balances = $"{1e9} {1e9} {1e9}" ;
-        testRunner.Process(new object[] { "1 1 1", balances}, new object[] { "10" });
+        testRunner.Process(new object[] { "1 1 1", balances}, new object[] { "4500000004500000001" });
     }
 }

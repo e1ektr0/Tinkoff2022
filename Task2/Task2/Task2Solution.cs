@@ -18,10 +18,9 @@ public class Task2Solution : IConsoleTest
 
         var max = x / a + y / b + z / c;
 
-        long result = 0;
-        for (long i = 0; i <= max; i++)
-            result += max - i +1;
-
+        var constanta = max + 1;
+        var result = (constanta+1) * (max+1) / 2;//S_n=\frac{(a_1+a_n)n}{2}
+        
         textWriter.WriteLine(result);
     }
 
