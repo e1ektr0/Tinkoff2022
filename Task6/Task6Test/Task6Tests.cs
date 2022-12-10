@@ -8,6 +8,9 @@ public class Task6Tests
 {
     [Test]
     [TestCase(new object[] { "4", "3", "2", "5", "2" }, new object[] { "0", "1", "7", "7" })]
+    [TestCase(new object[] { "3","0", "9","10" }, new object[] { "0", "9", "10" })]
+    [TestCase(new object[] { "3","0", "5","6" }, new object[] { "0", "5", "6" })]
+    [TestCase(new object[] { "2","0", "5" }, new object[] { "0", "5" })]
     public void BaseTest(object[] inputStrings, object[] results)
     {
         var testRunner = new TestRunner<Task6Solution>();
@@ -28,6 +31,7 @@ public class Task6Tests
     [Test]
     [TestCase((int)3e5)]
     [TestCase((int)3e4)]
+    [TestCase((int)3e3)]
     public void ALotOfNumbers(int count)
     {
         var input = new List<object> { count.ToString() };
